@@ -42,9 +42,17 @@ Sample Output 2:
 #     print()
 
 
-"""другие"""
+# С помощью zip
 n, m = (int(i) for i in input().split())
 for t in zip(*[input().split() for _ in range(n)]):
     print(*t)
+
+
+# С помощью numpy
+import numpy as np
+
+n, m = (int(i) for i in input().split())
+a = np.array([input().split() for _ in range(n)])
+print(*a.transpose().tolist())
 
 
