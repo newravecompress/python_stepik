@@ -31,3 +31,20 @@ d
 Sample Output 3:
 -1
 """
+
+text = input()
+pattern = input()
+
+found = False
+for i in range(len(text)):
+    if text[i:].startswith(pattern):
+        found = True
+        print(i, end=' ')
+
+if not found:
+    print(-1)
+
+
+# Короткий вариант
+text, pattern = input(), input()
+print(" ".join([str(i) for i in range(len(text)) if text[i:].startswith(pattern)]) if pattern in text else "-1")

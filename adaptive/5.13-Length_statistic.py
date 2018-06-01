@@ -25,6 +25,11 @@ Sample Output:
 9: 2
 """
 
+from collections import Counter
+
+for l, w in sorted(Counter(len(word) for word in input().split()).items()):
+    print("{}: {}".format(l, w))
+
 
 '''
 https://codefisher.org/catch/blog/2015/04/22/python-how-group-and-count-dictionaries/

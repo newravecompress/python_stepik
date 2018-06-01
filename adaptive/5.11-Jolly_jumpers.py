@@ -31,14 +31,27 @@ Sample Input 3:
 Sample Output 3:
 Jolly
 """
-# TODO: доделать задачу!
-import numpy as np
 
 sequence = [int(i) for i in input().split()]
-diff = tuple(i for i in range(1, len(sequence)))
+diff_list = [i for i in range(1, len(sequence))]
+
+if len(sequence) == 1:
+    print('Jolly')
+else:
+    for i in range(0, len(sequence) - 1):
+        dif = abs(sequence[i] - sequence[i + 1])
+        if dif in diff_list:
+            diff_list.remove(dif)
+        else:
+            print('Not jolly')
+            break
+    if not diff_list:
+        print('Jolly')
 
 
-for i in range(0, len(sequence)):
-   dif = np.abs(sequence[i] - sequence[i+1])
+# Короче
+nums = tuple(int(i) for i in input().split())
 
-print(diff)
+is_jolly = sorted(abs(nums[i] - nums[i-1]) for i in range(1, len(nums))) == list(range(1, len(nums)))
+
+print('Jolly' if is_jolly else 'Not jolly')
