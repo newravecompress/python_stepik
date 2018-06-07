@@ -23,6 +23,13 @@ print(squared)
 squared = [n ** 2 for n in range(11) if n % 2 is 0]     # additional statement
 print(squared)
 
+z = [(x, y) for x in range(3) for y in range(3) if y >= x]
+print(z)
+
+z = ((x, y) for x in range(3) for y in range(3) if y >= x)  # В круглых скобках будет генератор
+print(z)
+print(next(z))
+print(next(z))
 
 # dictionary comprehensions
 char_frequency = {

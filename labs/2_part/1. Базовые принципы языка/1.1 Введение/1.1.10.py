@@ -16,3 +16,7 @@ for i in range(n):
     sum += num
 
 print(sum)
+
+
+# В одну строчку:
+print(sum(int(input()) for _ in range(int(input()))))
