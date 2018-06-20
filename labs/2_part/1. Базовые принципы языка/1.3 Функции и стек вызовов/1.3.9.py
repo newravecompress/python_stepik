@@ -13,16 +13,15 @@ def closest_mod_5(x):
 '''
 
 def closest_mod_5(x):
-    if x % 5 == 0:
-        return x
-    else:
-        y = x + 1
-        while True:
-            if y % 5 == 0:
-                return y
-            y += 1
+    while True:
+        if x % 5 == 0:
+            return x
+        x += 1
 
 
 # еще вариант
 def closest_mod_5(x):
     return x if x % 5 == 0 else 5 - (x % 5) + x
+
+def closest_mod_5(x):
+    return (x + 4) // 5 * 5

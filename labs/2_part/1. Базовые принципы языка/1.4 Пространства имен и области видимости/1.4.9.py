@@ -98,7 +98,6 @@ tree = {
 # чтобы проходить по нашему псевдо-дереву, необходимо сделать рекурсивную функцию
 # она будет проходить по дереву, пока не дойдет до скоупа global
 def get_value(namespace, variable):
-    global tree
     if namespace == 'global':
         if variable in tree[namespace]['vars']:
             print(namespace)
@@ -110,8 +109,8 @@ def get_value(namespace, variable):
         else:
             get_value(tree[namespace]['parent'], variable)
 
-num = int(input())
-for i in range(num):
+
+for i in range(int(input())):
     operation, namespace, variable = input().split()
     if operation == 'add':
         tree[namespace]['vars'].append(variable)
@@ -126,28 +125,36 @@ for i in range(num):
         get_value(namespace, variable)
 
 
-# еще вариант:
-# put your python code here
-def getparentns(v,n):
-    global vr, ns
-    if n == 'none':
-        return 'None'
-    elif v in vr[n]:
-        return n
-    else:
-        return getparentns(v,ns[n])
+'''
+Пример решения. Будем храним две структуры:
+1) Кто чей родитель
+2) Переменные объявленные в данном пространстве имён
 
-vr = {'global': []}
-ns = {'global':'none'}
-lst = []
+Если команда create -- создаём новое пространство имён 
+(запоминаем родителя и создаём пустое множество переменных, объявленных в этом пространстве имен).
+
+Если команда add -- то просто помещаем имя переменной в соответствующее множество.
+
+Если команда get -- то проверяем наличие данной переменной в нашем пространстве имён, 
+если не нашли: проверяем в родителе. Если не нашли в родителе, проверяем в родителе родителя и так далее. 
+Как только нашли имя переменной -- вывели на экран пространство имён, в котором нашли. 
+Если в процессе поиска мы имя не нашли (fst is None) -- выводим None на экран.
+'''
 n = int(input())
-for i in range(n):
-    a = input().split()
-    if a[0] == 'create':
-        ns[a[1]] = a[2]
-        vr[a[1]] = []
-    elif a[0] == 'add':
-        vr[a[1]].append(a[2])
-    else:
-        lst.append(getparentns(a[2],a[1]))
-print(*lst, sep='\n')
+
+parent = {"global": None}
+vs = {"global": set()}
+
+for _ in range(n):
+    t, fst, snd = input().split()
+    if t == "create":
+        parent[fst] = snd
+        vs[fst] = set()
+    elif t == "add":
+        vs[fst].add(snd)
+    else:  # t == get
+        while fst is not None:
+            if snd in vs[fst]:
+                break
+            fst = parent[fst]
+        print(fst)
