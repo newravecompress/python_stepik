@@ -92,3 +92,29 @@ for j in range(int(input())):
     else:
         print('No')
 
+
+# Другое решение:
+n = int(input())
+
+parents = {}
+for _ in range(n):
+    a = input().split()
+    parents[a[0]] = [] if len(a) == 1 else a[2:]
+
+def is_parent(child, parent):
+    return child == parent or any(map(lambda p: is_parent(p, parent), parents[child]))
+
+q = int(input())
+for _ in range(q):
+    a, b = input().split()
+    print("Yes" if is_parent(b, a) else "No")
+
+
+# Еще короче:
+def isP(pr, ch):
+    return ch == pr or any(map(lambda pl: isP(pr, pl), p[ch]))
+p = {}
+for j in range(2):
+    for c in [input().split() for i in range(int(input()))]:
+        if j: print(['No', 'Yes'][isP(*c)])
+        else: p[c[0]] = c[2:]
