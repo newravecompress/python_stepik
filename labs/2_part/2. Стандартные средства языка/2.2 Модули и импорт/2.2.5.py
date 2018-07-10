@@ -20,3 +20,15 @@ new_date = date+delta
 new_date = new_date.strftime("%Y %m %d").replace(" 0", " ")
 
 print(new_date)
+
+
+# Другой вариант:
+import datetime
+
+y, m, d = map(int, input().split())
+days = int(input())
+
+current = datetime.date(year=y, month=m, day=d)
+current += datetime.timedelta(days=days)
+
+print("{} {} {}".format(current.year, current.month, current.day))

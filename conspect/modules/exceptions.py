@@ -1,3 +1,6 @@
+GREETING = "Hello, "
+_GREETING = "Hello, "   # Скрытие имени при импортировании через *
+
 class BadName(Exception):
     pass
 
@@ -8,3 +11,6 @@ def greet(name):
         raise BadName(name + " is inappropriate name")
 
 print('Is executable!')
+
+# Указание имен, импортируемых через *
+__all__ = ["BadName", "greet"]

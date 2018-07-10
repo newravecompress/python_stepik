@@ -27,18 +27,16 @@ with open("encrypted.bin", "rb") as inp:
 ﻿Работа с файлами рассмотрена в следующем уроке, поэтому вы можете вернуться к этой задаче после просмотра следующего урока.
 '''
 
-from simplecrypt import *
+import simplecrypt
 
 
-with open('passwords.txt') as f_obj:
-    passwords = f_obj.readlines()
+passwords = open("passwords.txt").readlines()
+encrypted = open("encrypted.bin", "rb").read()
 
-with open("encrypted.bin", "rb") as inp:
-    encrypted = inp.read()
-    for password in passwords:
-        try:
-            text = decrypt(password.strip(), encrypted)
-            print(text)
-        except:
-            print('Неправильный пароль')
-            continue
+for password in passwords:
+    try:
+        text = simplecrypt.decrypt(password.strip(), encrypted)
+        print(text.decode("utf-8"))
+    except simplecrypt.DecryptionException:
+        print('Неправильный пароль')
+        continue
