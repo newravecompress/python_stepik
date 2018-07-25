@@ -30,6 +30,7 @@ gen = random_generator(3)
 # слова yield. После этого он вернет значение наружу, туда, где мы вызвали функцию next()
 # В момент yield'а запоминается состояние функции, чтобы в следующий раз начать с этого момента
 # в момент, когда мы не найдем yield, генератор бросит StopIteration
+print(type(gen))
 print(gen)
 # таким образом, генератор аналогичен конструкции RandomIterator
 for i in gen:
@@ -45,12 +46,9 @@ def simple_gen():
     print('Checkpoint 3')
 
 gen = simple_gen()
-x = next(gen)
-print(x)
-y = next(gen)
-print(y)
-z = next(gen)   # Checkpoint 3
-print(z)        # StopIteration
+print(next(gen))
+print(next(gen))
+print(next(gen))    # Checkpoint 3, StopIteration
 
 # В генератор можно вставить return, это будет равносильно вызову StopIteration
 # Если вернуть что-то конкретное, то это станет сообщением внутри StopIteration:
@@ -64,12 +62,9 @@ def simple_gen():
     print('Checkpoint 3')
 
 gen = simple_gen()
-x = next(gen)
-print(x)
-y = next(gen)
-print(y)
-z = next(gen)   # Checkpoint 3
-print(z)        # StopIteration: No more elements
+print(next(gen))
+print(next(gen))    # Checkpoint 3, StopIteration: No more elements
+print(next(gen))
 
 
 

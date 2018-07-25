@@ -15,7 +15,7 @@ print(next(iterator)) // StopIteration
 for i in book:
     print(i)
 
-# Эквивалент:
+# Эквивалент цикла for .. in:
 it = iter(book)
 while True:
     try:
