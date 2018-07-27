@@ -30,21 +30,49 @@ genome[1] = 'c' # ошибка - строки неизменяемы
 for c in genome:
     print(c)
 
-# количество вхождений подстроки
-genome.count('c')   # рассматриваются неперекрывающиеся последовательности
-
-
 s = 'aTbgdaDCGcc'
 p = 'cc'
 s.upper()   # к верхнему регистру
 s.lower()   # к нижнему регистру
-s.count(p)  # количество вхождений
 s.find(p)   # где встречается в первый раз
 s.find('u') # -1 - нигде не встречается
-# для проверки вхождения подстроки лучше использовать if i in string
 
-s.replace('a', 'A') # заменяет ВСЕ вхождения первого символа на второй
+# для проверки вхождения подстроки лучше использовать if i in string
+print('abc' in 'abcba')     # True
+print('abce' in 'abcba')    # False
+
+# .find имеет другие аргументы
+print('cabcad'[1:].find('abc'))     # 0
+print('cabcabcd'.find('abc', 2))    # 4 - поиск начиная с третьего элемента
+
+# .index - аналог .find, но бросает ошибку ValueError, если ничего не найдено
+print('abcba'.index('abc'))     # 0
+print('abcba'.index('abce'))    # ValueError: substring not found
+
+# поиск в начале
+s = 'The man in black fled across the desert'
+print(s.startswith('The man in black'))
+print(s.startswith(('The man in black', 'The woman', 'The dog')))   # Начинается ли с какой-либо из этих строк
+
+# поиск в конце
+s = 'The man in black fled across the desert'
+print(s.endswith('desert'))
+
+# количество вхождений подстроки
+print('ababa'.count('aba'))   # 1, рассматриваются неперекрывающиеся последовательности
+
+s.replace('a', 'A')     # заменяет ВСЕ вхождения первого символа на второй
 s.upper().count('gt'.upper())   # последовательный вызов команд
+
+# У многих функций есть правосторонний аналог
+print('abababa'.rfind('aba'))
+
+s = "_*__1, 2, 3, 4__*_"
+print(repr(s.rstrip('*_')))
+print(repr(s.lstrip('_*')))
+
+numbers = map(str, [1, 2, 3, 4, 5])
+print(repr(' '.join(numbers)))      # '1 2 3 4 5'
 
 # все эти операции не изменяют строку
 # для изменения строки необходимо сделать присвоение
@@ -59,3 +87,23 @@ dna[-4:]    # GCTA с четвертого от конца до конца
 dna[1:-1]   # TGGCCTAGCGCT от первого до предпоследнего
 dna[1:-1:2] # от первого до предпоследнего с шагом 2
 dna[::-1]   # все символы в обратном порядке
+
+
+# Форматирование
+capital = 'London is the capital of Great Britain'
+template = '{} is the capital of {}'
+print(template.format('London', 'Great Britain'))
+print(template.format('Vaduz', 'Liechtenstein'))
+# Именованные аргументы
+template = '{capital} is the capital of {country}'
+print(template.format(capital='London', country='Great Britain'))
+# форматирование поддерживает доступ к атрибутам
+import requests
+template = 'Response from {0.url} with code {0.status_code}'
+res = requests.get('https://docs.python.org/3.5/')
+print(template.format(res))
+# а также ограничения длин
+from random import random
+x = random()
+print(x)
+print('{:.3}'.format(x))
